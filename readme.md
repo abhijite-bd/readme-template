@@ -85,7 +85,7 @@ for order list
 ### task list
 - [x] task1
 - [x] task2
-- [] task3  
+-  task3  
 ### Automatic link
 http://www.google.com  
 ### Disable link
@@ -112,7 +112,6 @@ http://www.google.com
 ### table syntax
 |Name | Id| Mobile|  
 |----|----|----|
-Abhijite|2002029 |01521529908|
-Kamona |2002028  |01788116502|
+Abhijite|2002029 |0000000000|
 
 
