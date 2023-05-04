@@ -65,66 +65,54 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-    ll p, q, r, d, ans, mn, i, j;
-    cin >> p >> q >> r;
-    if (p / 3 < min(r, q) / 2)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        mn = p / 3;
-        p = p % 3;
-        q -= mn * 2;
-        r -= mn * 2;
-        ans = mn * 7;
-    }
-    else
-    {
-        ll d = min(q, r);
-        if (d == q)
+        map<char, int> mp;
+        cin >> n;
+        string s;
+        cin >> s;
+        string ans = "";
+        for (i = 0; i < n; i++)
         {
-            mn = q / 2;
-            r -= 2 * mn;
-            q -= 2 * mn;
-            p -= mn * 3;
-            ans = mn * 7;
-        }
-        else
-        {
-            mn = r / 2;
-            r -= 2 * mn;
-            q -= 2 * mn;
-            p -= mn * 3;
-            ans = mn * 7;
-        }
-    }
-    ll ans1 = 0;
-    for (i = 0; i < 7; i++)
-    {
-        ll day = 0;
-        ll a = p, b = q, c = r;
-        for (j = i; a != 0 or b != 0 or c != 0; j++)
-        {
-            j %= 7;
-            if (j == 0 or j == 3)
+            if (i == 0)
             {
-                if (b == 0)
-                    break;
-                b--;
+                mp[s[i]] = 1;
+                ans += "1";
+                continue;
             }
-            else if (j == 1 or j == 2 or j == 5)
+            if (mp[s[i]] == 1)
             {
-                if (a == 0)
-                    break;
-                a--;
+                ans += "1";
             }
+            else if (mp[s[i]] == 2)
+                ans += "2";
             else
             {
-                if (c == 0)
-                    break;
-                c--;
+                if (ans[i - 1] == '1')
+                {
+                    mp[s[i]] = 2;
+                    ans += "2";
+                }
+                else
+                {
+                    mp[s[i]] = 1;
+                    ans += "1";
+                }
             }
-            day++;
         }
-        ans1 = max(ans1, day);
+        // cout << ans << endl;
+        int flag = 1;
+        for (i = 0; i < n; i++)
+        {
+            if (ans[i] == ans[i + 1])
+                flag = 0;
+        }
+        if (flag)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
     }
-    cout << ans1 + ans << endl;
     return 0;
 }

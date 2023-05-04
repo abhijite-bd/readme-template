@@ -60,71 +60,45 @@ bool chk_coor(ll i, ll j)
     }
     return true;
 }
+int func(ll n)
+{
+    int ans = 0;
+    while (n != 0)
+    {
+        ans += (n % 10);
+        n /= 10;
+    }
+    return ans % 3;
+}
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-    ll p, q, r, d, ans, mn, i, j;
-    cin >> p >> q >> r;
-    if (p / 3 < min(r, q) / 2)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        mn = p / 3;
-        p = p % 3;
-        q -= mn * 2;
-        r -= mn * 2;
-        ans = mn * 7;
-    }
-    else
-    {
-        ll d = min(q, r);
-        if (d == q)
+        cin >> n;
+        ll a[n];
+        int one = 0, two = 0;
+        int ans = 0;
+        for (i = 0; i < n; i++)
         {
-            mn = q / 2;
-            r -= 2 * mn;
-            q -= 2 * mn;
-            p -= mn * 3;
-            ans = mn * 7;
-        }
-        else
-        {
-            mn = r / 2;
-            r -= 2 * mn;
-            q -= 2 * mn;
-            p -= mn * 3;
-            ans = mn * 7;
-        }
-    }
-    ll ans1 = 0;
-    for (i = 0; i < 7; i++)
-    {
-        ll day = 0;
-        ll a = p, b = q, c = r;
-        for (j = i; a != 0 or b != 0 or c != 0; j++)
-        {
-            j %= 7;
-            if (j == 0 or j == 3)
-            {
-                if (b == 0)
-                    break;
-                b--;
-            }
-            else if (j == 1 or j == 2 or j == 5)
-            {
-                if (a == 0)
-                    break;
-                a--;
-            }
+            cin >> a[i];
+            if (a[i] % 3 == 0)
+                ans++;
+            else if (a[i] % 3 == 1)
+                one++;
             else
-            {
-                if (c == 0)
-                    break;
-                c--;
-            }
-            day++;
+                two++;
         }
-        ans1 = max(ans1, day);
+        int ct = min(one, two);
+        one -= ct;
+        two -= ct;
+        ans += (one / 3);
+        ans += (two / 3);
+        cout << ans+ct << endl;
     }
-    cout << ans1 + ans << endl;
     return 0;
 }
