@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,29 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    string s1, s2, s, x, y;
+    int t, n, i, j, k, l;
+    getline(cin, s1);
+    getline(cin, s2);
+    map<char, int> mp;
+    int flag = 1;
+    for (i = 0; i < s1.size(); i++)
     {
-        cin >> a[i];
+        mp[s1[i]]++;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    for (i = 0; i < s2.size(); i++)
+    {
+        if (s2[i] == ' ')
+            continue;
+        mp[s2[i]]--;
+        if (mp[s2[i]] < 0)
+            flag = 0;
+    }
+
+    if (flag)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
     return 0;
 }

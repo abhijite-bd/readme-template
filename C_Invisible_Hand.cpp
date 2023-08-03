@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,40 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
+    ll t, n, m, i, j, k, l;
+    cin >> n >> m;
+    ll sell[n], buy[m];
+    map<ll, int> mp;
     for (i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> sell[i];
+        mp[sell[i]]++;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    for (i = 0; i < n; i++)
+    {
+        cin >> buy[i];
+    }
+    sort(sell, sell + n);
+    sort(buy, buy + m);
+    ll ans = 0;
+    if (sell[0] > buy[m - 1])
+    {
+        cout << buy[m - 1] + 1 << endl;
+        return 0;
+    }
+    for (i = 0; i < n; i++)
+    {
+        ll ub = lower_bound(buy, buy + m, sell[i]) - buy;
+        // cout << mp[sell[i]] + i << ss << m - ub << endl;
+        if (mp[sell[i]] + i >= m - ub)
+        {
+            ans = sell[i];
+            break;
+        }
+    }
+    if (ans == 0)
+        cout << buy[m - 1] + 1 << endl;
+    else
+        cout << ans << endl;
     return 0;
 }

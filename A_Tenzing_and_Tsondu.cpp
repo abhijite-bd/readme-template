@@ -40,16 +40,28 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, m, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> m;
+        ll ans1 = 0, ans2 = 0;
+        for (i = 0; i < n; i++)
+        {
+            cin >> k;
+            ans1 += k;
+        }
+        for (i = 0; i < m; i++)
+        {
+            cin >> k;
+            ans2 += k;
+        }
+        if (ans1 > ans2)
+            cout << "Tsondu\n";
+        else if (ans1 < ans2)
+            cout << "Tenzing\n";
+        else
+            cout << "Draw\n";
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

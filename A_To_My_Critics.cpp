@@ -40,16 +40,19 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, a, b, c;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> a >> b >> c;
+        if (a + b >= 10)
+            cout << "YES" << endl;
+        else if (b + c >= 10)
+            cout << "YES" << endl;
+        else if (a + c >= 10)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

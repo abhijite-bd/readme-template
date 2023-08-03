@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,50 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k;
+        ll a[n], b[k + 1];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        int prev[k + 1];
+        memset(prev, 0);
+        vector<pair<int, int>> diff(k + 1, {0, 0});
+
+        for (i = 0; i < n; i++)
+        {
+            ll v = i - prev[a[i]];
+            if (diff[a[i]].first < v)
+            {
+                diff[a[i]].second = diff[a[i]].first;
+                diff[a[i]].first = v;
+            }
+            else if (diff[a[i]].second < v)
+                diff[a[i]].second = v;
+
+            prev[a[i]] = i + 1;
+        }
+        for (i = 1; i <= k; i++)
+        {
+            ll v = n - prev[a[i]];
+            if (diff[k].first < v)
+            {
+                diff[k].second = diff[k].first;
+                diff[k].first = v;
+            }
+            else if (diff[k].second < v)
+                diff[k].second = v;
+        }
+        int res = inf;
+        for (i = 0; i <n; i++)
+        {
+            res = min(res, max(diff[a[i]].first / 2, diff[a[i]].second));
+        }
+        cout << res << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

@@ -40,16 +40,31 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, i, n, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        string s;
+        cin >> s;
+        stack<char> st;
+        int ans = 0;
+        for (i = 0; i < s.size(); i++)
+        {
+            if (s[i] == '<')
+                st.push(s[i]);
+            else
+            {
+                if (st.empty() == 0)
+                {
+                    st.pop();
+                    if (st.empty())
+                        ans = i + 1;
+                }
+                else
+                    break;
+            }
+        }
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

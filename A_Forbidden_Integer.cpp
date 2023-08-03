@@ -40,16 +40,43 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, x, k, i, j, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k >> x;
+        if (x != 1)
+        {
+            cout << "YES" << endl;
+            cout << n << endl;
+            while (n--)
+                cout << 1 << ss;
+            cout << endl;
+        }
+        else if (n % 2 and k == 2 or k == 1)
+            cout << "NO" << endl;
+        else
+        {
+            if (n % 2 == 0 )
+            {
+                cout << "YES" << endl;
+                cout << n / 2 << endl;
+                for (i = 0; i < n / 2; i++)
+                {
+                    cout << 2 << ss;
+                }
+            }
+            else
+            {
+                cout << "YES" << endl;
+                cout << n / 2 << endl;
+                for (i = 0; i < n / 2 - 1; i++)
+                {
+                    cout << 2 << ss;
+                }
+                cout << 3 << endl;
+            }
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

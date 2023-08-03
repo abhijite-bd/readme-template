@@ -40,16 +40,46 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        vector<pair<int, int>> v;
+        int flag = 1;
+        k = 1;
+        j = 0;
+        int sum = 0;
+        for (i = 0; i < n; i++)
+        {
+            if (j)
+                sum += a[i];
+            else
+                sum -= a[i];
+            if (sum == 0)
+            {
+                v.pb({k, i + 1});
+                k = i + 1;
+                j=0;
+                continue;
+            }
+            j ^= 1;
+        }
+        if (sum != 0)
+            cout << -1 << endl;
+        else
+        {
+            cout << v.size() << endl;
+            for (i = 0; i < v.size(); i++)
+            {
+                cout << v[i].first << ss << v[i].second << endl;
+            }
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

@@ -40,16 +40,34 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    string s;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> s;
+        int turn = 0;
+        stack<char> st;
+        st.push(s[0]);
+        for (i = 1; i < n; i++)
+        {
+            if (st.empty())
+                st.push(s[i]);
+            else
+            {
+                if (st.top() == s[i])
+                    st.push(s[i]);
+                else
+                {
+                    st.pop();
+                    turn ^= 1;
+                }
+            }
+        }
+        if (turn)
+            cout << "Zlatan\n";
+        else
+            cout << "Ramos\n";
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

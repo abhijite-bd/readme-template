@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -35,21 +36,56 @@ bool chk_coor(ll i, ll j)
     }
     return true;
 }
+
 ll cs = 1;
-const int N = 2e5 + 10;
+const int N = 30;
+int dp[N][N];
 const int M = 1e9 + 7;
+void check(string s)
+{
+    set<char> us;
+    for (i = 0; i < s.size(); i++)
+    {
+        us.insert(s[i]);
+    }
+    int a, b;
+    auto it = us.begin();
+    if (us.size() == 1)
+    {
+        a = b = *it - 'a' + 1;
+        dp[a][b] += s.size();
+    }
+    else if (us.size() == 2)
+    {
+        a = *it - 'a' + 1;
+        it++;
+        b = *it - 'a' + 1;
+        dp[a][b] += s.size();
+    }
+    // cout << a << ss << b << endl;
+}
 int main()
 {
-
-    int i, n;
+    int n, i, j, k, l;
     cin >> n;
-    vl a(n);
+    string x;
     for (i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> x;
+        check(x);
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    int mx = 0;
+    for (i = 1; i <= 26; i++)
+    {
+        for (j = 1; j <= 26; j++)
+        {
+            int d = dp[i][i];
+            if (i != j)
+                d = d + dp[j][j] + dp[i][j];
+            mx = max(mx, d);
+        }
+        cout << endl;
+    }
+    cout << mx << endl;
     return 0;
 }

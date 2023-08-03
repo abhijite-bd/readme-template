@@ -35,21 +35,40 @@ bool chk_coor(ll i, ll j)
     }
     return true;
 }
+
+bool cmp(vector<ll> &a, vector<ll> &b)
+{
+    return double(a[1]) / a[0] > double(b[1]) / b[0];
+}
 ll cs = 1;
-const int N = 2e5 + 10;
+const int N = 1e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
+    ll t, w, i, j, ans;
+    cin >> n >> w;
+    vector<ll> dp(N, inf), ndp(N, inf);
+    dp[0] = ndp[0] = 0;
     for (i = 0; i < n; i++)
     {
-        cin >> a[i];
+        ll wt, va;
+        cin >> wt >> va;
+        for (j = 0; j < N; j++)
+        {
+            dp[j] = ndp[j];
+            if (j >= va)
+            {
+                ndp[j] = min(ndp[j], dp[j - va] + wt);
+            }
+        }
+        dp = ndp;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    ans = 0;
+    for (i = 0; i < N; i++)
+    {
+        if (dp[i] <= w)
+            ans = i;
+    }
+    cout << ans << endl;
     return 0;
 }

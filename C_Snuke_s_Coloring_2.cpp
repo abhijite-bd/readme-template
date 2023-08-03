@@ -40,16 +40,30 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, m, x, i, j;
+    cin >> n >> m >> x;
+    int minx = n, maxx = n, miny = m, maxy = m;
+    for (i = 0; i < x; i++)
     {
-        cin >> a[i];
+        int p, q;
+        cin >> p >> q;
+        if (p < q and p < m - q and minx > p)
+        {
+            minx = min(minx, p);
+        }
+        else if (n - p < q and n - p < m - q and maxx > n - p)
+        {
+            maxx = min(maxx, n - p);
+        }
+        else if (q < p and q < n - p and miny > q)
+        {
+            miny = min(miny, q);
+        }
+        else
+            maxy = min(maxy, m - q);
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    cout << minx << ss << maxx << ss << miny << ss << maxy << endl;
+    cout << 2 * (maxx + maxy - minx - miny);
+
     return 0;
 }

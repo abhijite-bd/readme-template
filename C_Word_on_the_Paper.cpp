@@ -40,16 +40,38 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n = 8, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        string s[8];
+        for (i = 0; i < n; i++)
+        {
+            cin >> s[i];
+        }
+        string ans = "";
+        int flag = 0;
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+            {
+                if (s[i][j] != '.')
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag)
+                break;
+        }
+        for (i = i; i < n; i++)
+        {
+            if (s[i][j] != '.')
+                ans += s[i][j];
+            else
+                break;
+        }
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

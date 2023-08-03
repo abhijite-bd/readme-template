@@ -40,16 +40,61 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n], b[n], c[2 * n + 1], d[2 * n + 1];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            cin >> b[i];
+        }
+        memset(c, 0, sizeof(c));
+        int pre = a[0];
+        c[a[0]] = 1;
+        int cnt = 1;
+        for (i = 1; i < n; i++)
+        {
+            if (pre == a[i])
+                cnt++;
+            else
+            {
+                c[pre] = max(c[pre], cnt);
+                cnt = 1;
+            }
+            pre = a[i];
+        }
+        c[pre] = max(c[pre], cnt);
+        memset(d, 0, sizeof(d));
+        pre = b[0];
+        d[b[0]] = 1;
+        cnt = 1;
+        for (i = 1; i < n; i++)
+        {
+            if (pre == b[i])
+                cnt++;
+            else
+            {
+                d[pre] = max(d[pre], cnt);
+                cnt = 1;
+            }
+
+            pre = b[i];
+        }
+        d[pre] = max(d[pre], cnt);
+        int mx = 0;
+        for (i = 1; i <= 2 * n; i++)
+        {
+            
+            if (c[i] + d[i] > mx)
+                mx = c[i] + d[i];
+        }
+        cout << mx << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

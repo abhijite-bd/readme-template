@@ -37,19 +37,32 @@ bool chk_coor(ll i, ll j)
 }
 ll cs = 1;
 const int N = 2e5 + 10;
+int dp[N];
+int mn[N];
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n + 1];
+        for (i = 1; i <= n; i++)
+        {
+            cin >> a[i];
+            dp[i] = inf;
+            mn[i] = inf;
+        }
+        dp[0] = 0;
+        mn[0] = 0;
+        for (i = 1; i <= n; i++)
+        {
+            dp[i] = min(dp[i - 1] + 1, mn[a[i]]);
+            mn[a[i]] = min(mn[a[i]], dp[i - 1]);
+            // cout << dp[i] <<ss<<mn[a[i]]<< endl;
+        }
+        cout << n - dp[n] << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

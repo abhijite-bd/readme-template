@@ -40,16 +40,25 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, ans, n, i;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        string s;
+        cin >> n >> s;
+        int ans = 1, c = 1;
+        for (i = 0; i < n - 1; i++)
+        {
+            if (s[i] == s[i + 1])
+                c++;
+            else
+            {
+                ans = max(ans, c);
+                c = 1;
+            }
+        }
+        ans = max(ans, c);
+        cout << 1 + ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

@@ -40,16 +40,18 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, ans;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        ans = 0;
+        while (n != 0)
+        {
+            ans += n;
+            n /= 2;
+        }
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

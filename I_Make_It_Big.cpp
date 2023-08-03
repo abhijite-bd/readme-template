@@ -40,16 +40,47 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    string s;
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> s;
+        n = s.size();
+        string p = s;
+        // if (n == 2)
+        // {
+        //     cout << s << endl;
+        //     continue;
+        // }
+        int c = 0;
+        for (i = 0; i < n; i++)
+        {
+            if (c == 2)
+                break;
+            char mxc = s[i];
+            int mxp = i;
+            for (j = i + 1; j < n; j++)
+            {
+                if (s[j] >= mxc)
+                {
+                    mxc = s[j];
+                    mxp = j;
+                }
+            }
+            if (mxp > i)
+            {
+                swap(s[i], s[mxp]);
+                c++;
+            }
+        }
+
+        if (c == 1)
+            swap(s[n - 1], s[n - 2]);
+        if (s < p)
+            cout << p << endl;
+        else
+            cout << s << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

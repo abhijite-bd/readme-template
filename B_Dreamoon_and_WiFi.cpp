@@ -4,10 +4,10 @@ using namespace std;
 #define ll long long int
 #define gcd(a, b) __gcd(a, b)
 #define lcm(a, b) (a * b) / gcd(a, b)
-#define fast()                    \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(NULL);                \
-    cout.tie(NULL)
+#define fast()                  \
+  ios_base::sync_with_stdio(0); \
+  cin.tie(NULL);                \
+  cout.tie(NULL)
 #define max3(a, b, c) max(max(a, b), c)
 #define min3(a, b, c) min(min(a, b), c)
 #define pb push_back
@@ -29,27 +29,57 @@ vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, 
 ll n, m;
 bool chk_coor(ll i, ll j)
 {
-    if (i < 0 || j < 0 || i >= n || j >= m)
-    {
-        return false;
-    }
-    return true;
+  if (i < 0 || j < 0 || i >= n || j >= m)
+  {
+    return false;
+  }
+  return true;
 }
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
+int qqq = 0;
+void solve(string &s, int curr, int i, int need)
+{
+  if (i == s.size())
+  {
+    if (curr == need)
+    {
+      qqq++;
+      // cout << curr << endl;
+    }
+    return;
+  }
+
+  if (s[i] == '+')
+    solve(s, curr + 1, i + 1, need);
+  if (s[i] == '-')
+    solve(s, curr - 1, i + 1, need);
+  if (s[i] == '?')
+  {
+    solve(s, curr + 1, i + 1, need);
+    solve(s, curr - 1, i + 1, need);
+  }
+}
 int main()
 {
+  int i, j, k, l, n;
+  string s1, s2;
+  cin >> s1 >> s2;
+  n = s1.size();
+  int dis = 0;
+  for (i = 0; i < n; i++)
+  {
+    if (s1[i] == '+')
+      dis++;
+    else
+      dis--;
+  }
 
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
-    return 0;
+  int maxx = count(all(s2), '?');
+  maxx = (1 << maxx);
+  solve(s2, 0, 0, dis);
+  printf("%.12lf\n", 1.0 * qqq / maxx * 1.0);
+
+  return 0;
 }

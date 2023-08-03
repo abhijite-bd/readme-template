@@ -40,16 +40,21 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, m, k, ans;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> m >> k;
+        ans = 0;
+        for (i = 1; i <= 8; i++)
+        {
+            for (j = 1; j <= 8; j++)
+            {
+                if (max(abs(n - i), abs(m - j)) <= k)
+                    ans++;
+            }
+        }
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

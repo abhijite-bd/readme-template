@@ -40,16 +40,26 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int h1, h2, m1, m2, i, j, k, l, t;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        scanf("%d:%d", &h1, &m1);
+        scanf("%d:%d", &h2, &m2);
+        cin >> k;
+        float ans1, ans2;
+        ans1 = m1 - m2;
+        if (ans1 < 0)
+        {
+            ans1 += 60;
+            h2++;
+        }
+
+        ans1 += (h1 - h2) * 60;
+        ans2 = ans1;
+        if (k * 2 > ans1)
+            ans2 = k + (k - (k - ans1)) / 2;
+        printf("%.1lf %.1lf\n", ans1 + k, ans2);
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

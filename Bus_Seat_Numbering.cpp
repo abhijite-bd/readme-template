@@ -40,16 +40,19 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        if (n <= 10)
+            cout << "Lower Double\n";
+        else if (n <= 15)
+            cout << "Lower Single\n";
+        else if (n <= 25)
+            cout << "Upper Double\n";
+        else
+            cout << "Upper Single\n";
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

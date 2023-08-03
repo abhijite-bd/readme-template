@@ -40,16 +40,47 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k;
+        int a[n], b[n], c[n];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            cin >> b[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            cin >> c[i];
+        }
+        ll y = 0;
+        for (i = 0; i < n; i++)
+        {
+            if ((k & a[i]) != a[i])
+                break;
+            y |= a[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            if ((k & b[i]) != b[i])
+                break;
+            y |= b[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            if ((k & c[i]) != c[i])
+                break;
+            y |= c[i];
+        }
+        if (k == y)
+            cout << "Yes" << endl;
+        else
+            cout << "No" << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

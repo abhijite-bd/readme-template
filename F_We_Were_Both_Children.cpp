@@ -40,16 +40,38 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        ll a[n], b[n + 1];
+        ll ans = 0;
+        map<int, int> m;
+        memset(b, 0, sizeof(b));
+        for (i = 0; i < n; i++)
+        {
+
+            cin >> a[i];
+
+            if (a[i] == 1)
+                b[1]++;
+            else
+                m[a[i]]++;
+        }
+        for (auto e : m)
+        {
+            for (i = e.first; i <= n; i += e.first)
+            {
+                b[i] += e.second;
+            }
+        }
+        for (i = 2; i <= n; i++)
+        {
+            ans = max(ans, b[i]);
+        }
+
+        cout << b[1] + ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

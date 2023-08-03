@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,47 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
+    string s;
+    cin >> s;
     int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    if (s[0] == 'h')
     {
-        cin >> a[i];
+        cout << "http://";
+        i = 4;
+        for (int i = i + 1; i < s.size(); i++)
+        {
+            if (s[i] == 'r' and s[i + 1] == 'u')
+            {
+                n = i;
+            }
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    else
+    {
+        cout << "ftp://";
+        i = 3;
+        for (int i = i + 1; i < s.size(); i++)
+        {
+            if (s[i] == 'r' and s[i + 1] == 'u')
+            {
+                n = i;
+            }
+        }
+    }
+
+    for (i = i; i < n; i++)
+    {
+        cout << s[i];
+    }
+    cout << ".ru";
+    i += 2;
+    if (i < s.size())
+    {
+        cout << '/';
+    }
+    for (i = i; i < s.size(); i++)
+    {
+        cout << s[i];
+    }
     return 0;
 }

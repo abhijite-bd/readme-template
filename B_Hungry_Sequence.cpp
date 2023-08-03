@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -36,20 +37,37 @@ bool chk_coor(ll i, ll j)
     return true;
 }
 ll cs = 1;
-const int N = 2e5 + 10;
+const int N = 1300000;
+int prime[N];
 const int M = 1e9 + 7;
+void seive()
+{
+    int i, j;
+    prime[1] = 1;
+    for (i = 2; i * i <= N; i++)
+    {
+        for (j = i * i; j <= N; j += i)
+        {
+            prime[j] = 1;
+        }
+    }
+}
 int main()
 {
 
-    int i, n;
+    int n, i;
     cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int c = 0;
+    seive();
+    for (i = 2;; i++)
     {
-        cin >> a[i];
+        if (c == n)
+            break;
+        if (prime[i] == 0)
+        {
+            c++;
+            cout << i << ss;
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

@@ -26,7 +26,7 @@ using namespace std;
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +40,52 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k;
+        int a[n];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        int flag = 0;
+        if (a[0] == a[n - 1])
+        {
+            int c = 0;
+            for (i = 0; i < n; i++)
+            {
+                if (a[i] == a[0])
+                    c++;
+            }
+            if (c >= k)
+                flag = 1;
+        }
+        else
+        {
+            int c1 = 0, c2 = 0;
+            for (i = 0; i < n; i++)
+            {
+                if (c1 == k)
+                    break;
+                if (a[i] == a[0])
+                    c1++;
+            }
+            for (i = i; i < n; i++)
+            {
+                if (c2 == k)
+                    break;
+                if (a[i] == a[n - 1])
+                    c2++;
+            }
+            if (c1 == c2)
+                flag = 1;
+        }
+        if (flag)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

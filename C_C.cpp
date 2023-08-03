@@ -11,12 +11,23 @@ using namespace std;
 #define max3(a, b, c) max(max(a, b), c)
 #define min3(a, b, c) min(min(a, b), c)
 #define pb push_back
+#define ff first
+#define sc second
 #define all(v) v.begin(), v.end()
 #define allr(v) v.rbegin(), v.rend()
+#define vi vector<int>
+#define vl vector<ll>
+#define pii pair<int, int>
+#define pll pair<ll, ll>
 #define endl '\n'
-#define pi 3.141592653589793
-#define case cout << "Case " << cs++ << ": "
-ll n, m;
+#define PI 3.141592653589793
+#define inf 1e9 + 10
+#define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
+vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
+vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -27,28 +38,31 @@ bool chk_coor(ll i, ll j)
 }
 ll cs = 1;
 const int N = 2e5 + 10;
+int b[N];
 const int M = 1e9 + 7;
 int main()
 {
-    int n;
+    ll n, i, j, k, l;
     cin >> n;
-    if (n < 100)
-        cout << 0 << endl;
-    else
+    ll a[n];
+    for (i = 0; i < n; i++)
     {
-        int p = 0;
-        int i, f = 0;
-        int ans = 0;
-        for (i = 1; ans <= n; i++)
-        {
-            ans += 105;
-            if (ans - n >= 0 and ans - n <= 5 * i)
-                f = 1;
-        }
-        if (f)
-            cout << 1 << endl;
-        else
-            cout << 0 << endl;
+        cin >> a[i];
     }
+    sort(a, a + n);
+    ll mx = 1, c = 1;
+    // for (i = 0; i < n; i++)
+    // {
+    //     cout << a[i] << ss;
+    // }
+    // cout << endl;
+    for (i = 0; i < n; i++)
+    {
+        ll lb = lower_bound(a, a + n, a[i] + 6) - a;
+        // cout << a[i] << ss << lb << endl;
+        mx = max(mx, lb - i);
+    }
+    cout << mx << endl;
+
     return 0;
 }

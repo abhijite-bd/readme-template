@@ -36,20 +36,28 @@ bool chk_coor(ll i, ll j)
     return true;
 }
 ll cs = 1;
-const int N = 2e5 + 10;
+const int N = 1e5 + 10;
 const int M = 1e9 + 7;
+int a[N];
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    for (i = 0; i <= 1e5; i++)
     {
-        cin >> a[i];
+        if ((i ^ (i + 1)) == ((i + 2) ^ (i + 3)))
+            a[i] = 1;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    for (i = 1; i < 1e5; i++)
+    {
+        a[i] += a[i - 1];
+        a[i] %= M;
+    }
+
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        cout << a[n] << endl;
+    }
     return 0;
 }

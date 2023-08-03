@@ -38,18 +38,26 @@ bool chk_coor(ll i, ll j)
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
+set<ll> s;
+ll a, b;
+void start(ll n)
+{
+    if (n > 1e9+10)
+        return;
+    s.insert(n);
+    start(n * 10 + 4);
+    start(n * 10 + 7);
+}
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll ans = 0, i, j;
+    cin >> a >> b;
+    start(0);
+    for (i = a; i <= b; i++)
     {
-        cin >> a[i];
+        j = *lower_bound(all(s),i);
+        ans += j;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    cout << ans << endl;
     return 0;
 }

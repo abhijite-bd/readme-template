@@ -40,16 +40,32 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l, a, b;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> a >> b;
+        if (a == b)
+        {
+            if (a % 2)
+                cout << "CHEF\n";
+            else
+                cout << "CHEFINA\n";
+        }
+        else if (abs(a - b) >= 2)
+        {
+            if (a > b)
+                cout << "CHEF\n";
+            else
+                cout << "CHEFINA\n";
+        }
+        else
+        {
+            if (min(a, b) % 2)
+                cout << "CHEF\n";
+            else
+                cout << "CHEFINA\n";
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

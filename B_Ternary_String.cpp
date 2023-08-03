@@ -40,16 +40,40 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        string s;
+        int one, two, thr;
+        map<int, int> m;
+        cin >> s;
+        int ans = inf;
+        one = two = thr = inf;
+        for (i = 0; i < s.size(); i++)
+        {
+            m[s[i] - '0']++;
+            if ((s[i] - '0') == 1)
+            {
+                one = i;
+            }
+            if ((s[i] - '0') == 2)
+            {
+                two = i;
+            }
+            if ((s[i] - '0') == 3)
+            {
+                thr = i;
+            }
+            if (m[1] > 0 and m[2] > 0 and m[3] > 0)
+            {
+                ans = min(ans, max3(one, two, thr) - min3(one, two, thr));
+            }
+        }
+        if (ans == inf)
+            cout << 0 << endl;
+        else
+            cout << ans + 1 << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

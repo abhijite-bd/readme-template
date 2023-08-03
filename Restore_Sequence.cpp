@@ -36,20 +36,47 @@ bool chk_coor(ll i, ll j)
     return true;
 }
 ll cs = 1;
-const int N = 2e5 + 10;
+const int N = 1e7;
+bool prime[N];
+
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, j, i, k, l, n;
+    for (i = 2; i * i < N; i++)
     {
-        cin >> a[i];
+        if (prime[i] == 0)
+            for (j = i * i; j < N; j += i)
+            {
+                prime[j] = 1;
+            }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    vector<int> v;
+    k = 0;
+    for (i = 2; i < N and k <= 1e5; i++)
+    {
+        if (prime[i] == 0)
+        {
+            v.pb(i);
+            k++;
+        }
+    }
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        int a[n];
+        int ans[n];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            ans[i] = v[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            cout << v[a[i] - 1] << ss;
+        }
+        cout << endl;
+    }
     return 0;
 }

@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,24 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
+    string s;
+    cin >> s;
+    if (s == "ACE")
+        cout << "Yes" << endl;
+    else if (s == "BDF")
+        cout << "Yes" << endl;
+    else if (s == "CEG")
+        cout << "Yes" << endl;
+    else if (s == "DFA")
+        cout << "Yes" << endl;
+    else if (s == "EGB")
+        cout << "Yes" << endl;
+    else if (s == "FAC")
+        cout << "Yes" << endl;
+    else if (s == "GBD")
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
 
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

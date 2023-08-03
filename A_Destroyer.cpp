@@ -40,16 +40,30 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n];
+        map<int, int> mp;
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            mp[a[i]]++;
+        }
+        int flag = 1;
+        mp[-1] = inf;
+
+        for (i = 0; i < n; i++)
+        {
+            if (mp[a[i]] > mp[a[i] - 1])
+                flag = 0;
+        }
+        if (flag)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

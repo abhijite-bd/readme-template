@@ -40,16 +40,31 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        ll a[n];
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        ll ans = inf;
+        int flag = 1;
+        for (i = 1; i < n; i++)
+        {
+            if (a[i - 1] <= a[i])
+            {
+                ans = min(ans, (a[i] - a[i - 1]) / 2 + 1);
+            }
+            else
+                flag = 0;
+        }
+        if (!flag)
+            cout << 0 << endl;
+        else
+            cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

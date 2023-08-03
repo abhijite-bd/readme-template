@@ -1,3 +1,39 @@
+// 2 4 1 3 5 7
+
+// { }
+// 2
+// 4
+// 2 4
+
+// 1 3
+// 2 1 3
+// 4 1 3
+// 2 4 1 3
+
+// 1 5
+// 3 5
+
+// 2 1 5
+// 4 1 5
+// 2 4 1 5
+
+// 2 3 5
+// 4 3 5
+// 2 4 3 5
+
+// 2 1 7
+// 4 1 7
+// 2 4 1 7
+
+// 2 3 7
+// 4 3 7
+// 2 4 3 7
+
+// 2 5 7
+// 4 5 7
+// 2 4 5 7
+
+// 2 4 1 3 5 7
 #include <bits/stdc++.h>
 using namespace std;
 #define ss ' '
@@ -40,16 +76,26 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n];
+        ll ans = 1, odd = 0, even = 0;
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            if (a[i] % 2 == 0)
+            {
+                even++;
+                ans += ans;
+                ans %= M;
+            }
+        }
+        if (even == n)
+            ans--;
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

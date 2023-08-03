@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,36 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, x1, x2, y1, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    if (x1 == x2)
     {
-        cin >> a[i];
+        int d = abs(y1) + abs(y2);
+        cout << x1 + d << ss << y1 << ss << x2 + d << ss << y2 << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    else if (y1 == y2)
+    {
+        int d = abs(x1) + abs(x2);
+        cout << x1 << ss << y1 - d << ss << x2 << ss << y2 - d << endl;
+    }
+    else if (x1 == y2)
+    {
+        if (y1 < y2)
+            swap(y1, y2);
+        int d = abs(y1) + abs(y2);
+        cout << x1 << ss << y2 << ss << x2 << ss << y1 << endl;
+    }
+    else if (x1 - x2 == y1 - y2)
+    {
+        if (x1 == y1)
+        {
+            cout << x2 << ss << y1 << ss << x1 << ss << y2 << endl;
+            return 0;
+        }
+        int d = x1 - x2;
+        cout << x1 << ss << y1 - d << ss << x2 << ss << y2 + d << endl;
+    }
+    else
+        cout << -1 << endl;
     return 0;
 }

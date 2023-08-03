@@ -34,18 +34,17 @@ int main()
     cin >> t;
     while (t--)
     {
-        cin >> n >> k;
-        ll a[n];
-        ll mn = INT_MAX;
+        cin >> n ;
+        ll red[n],blue[n];
         for (i = 0; i < n; i++)
         {
-            cin >> a[i];
-            mn = min(a[i], mn);
+            cin>>red[i];
         }
-        if (k <= n)
-            cout << n << endl;
-        else
-            cout << max(n, k / mn + (k % mn != 0)) << endl;
+        for (i = 0; i < n; i++)
+        {
+            cin>>blue[i];
+        }
+        
     }
     return 0;
 }

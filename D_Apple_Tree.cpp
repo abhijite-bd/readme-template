@@ -38,18 +38,46 @@ bool chk_coor(ll i, ll j)
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
+vector<int> adj[N];
+ll child[N];
+ll dfs(int v, int par)
+{
+    child[v] = 0;
+    for (auto e : adj[v])
+    {
+        if (e != par)
+            child[v] += dfs(e, v);
+    }
+    if (child[v] == 0)
+        child[v] = 1;
+    return child[v];
+}
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        for (i = 0; i < n - 1; i++)
+        {
+            int u, v;
+            cin >> u >> v;
+            adj[u].pb(v);
+            adj[v].pb(u);
+        }
+        ll p = dfs(1, 0);
+        cin >> k;
+        while (k--)
+        {
+            int x, y;
+            cin >> x >> y;
+            cout << child[x] * child[y] << endl;
+        }
+        for (i = 0; i <= n; i++)
+        {
+            adj[i].clear();
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,52 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        int a[n];
+        set<pair<int, int>> s;
+        int mx = -100, mxn = 0;
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            if (mx < a[i])
+            {
+                mx = a[i];
+                mxn = i;
+            }
+        }
+
+        if (a[mxn] <= 0)
+        {
+            cout << n - 1 << endl;
+            for (i = n; i > 1; i--)
+            {
+                cout << i - 1 << " " << i << endl;
+            }
+            continue;
+        }
+        int c = 0;
+        while (a[mxn] < 20)
+        {
+            c++;
+            a[mxn] += a[mxn];
+        }
+        cout << c + n + n - 1 << endl;
+        for (i = 0; i < c; i++)
+        {
+            cout << mxn + 1 << ss << mxn + 1 << endl;
+        }
+        for (i = 0; i < n; i++)
+        {
+            cout << i + 1 << ss << mxn + 1 << endl;
+        }
+        for (i = 1; i < n; i++)
+        {
+            cout << i + 1 << ss << i << endl;
+        }
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

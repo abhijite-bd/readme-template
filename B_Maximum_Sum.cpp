@@ -40,46 +40,29 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-    ll t, n, i, j, k, l;
+    ll t, n, i, j, k, l, r;
     cin >> t;
     while (t--)
     {
         cin >> n >> k;
-        ll a[n + 1], b[n + 2];
-        for (i = 1; i <= n; i++)
+        ll a[n];
+        for (i = 0; i < n; i++)
         {
             cin >> a[i];
-            b[i] = a[i];
         }
-        sort(a + 1, a + n + 1);
-
-        a[0] = 0;
-        b[0] = 0;
-        b[n + 1] = 0;
-        for (i = 2; i <= n; i++)
+        sort(a, a + n);
+        l = 0, r = n - k;
+        ll tot = accumulate(a, a + r, 0LL);
+        ll ans = tot;
+        while (r < n)
         {
-            a[i] += a[i - 1];
+            tot -= (a[l] + a[l + 1]);
+            tot += a[r];
+            ans = max(ans, tot);
+            l += 2;
+            r++;
         }
-        for (i = n - 1; i > 0; i--)
-        {
-            b[i] += b[i + 1];
-        }
-        ll total = accumulate(a, a + n, 0LL);
-        ll temp1 = 0, temp2, temp = inf;
-
-        i = 2;
-        j = n;
-        while (k--)
-        {
-
-            temp1 = a[i];
-            temp2 = b[j];
-            cout << temp1 << ss << temp2 << endl;
-            temp = min(temp1, temp2);
-            i += 2;
-            j--;
-        }
-        cout << total - temp << endl;
+        cout << ans << endl;
     }
     return 0;
 }

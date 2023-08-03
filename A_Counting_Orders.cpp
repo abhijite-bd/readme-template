@@ -38,18 +38,39 @@ bool chk_coor(ll i, ll j)
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
+ll factor[N];
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    // factor[1] = 1;
+    // for (i = 2; i <= N; i++)
+    // {
+    //     factor[i] = (factor[i - 1] * i) % M;
+    // }
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n;
+        vl a(n), b(n);
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        for (i = 0; i < n; i++)
+        {
+            cin >> b[i];
+        }
+        sort(all(a));
+        sort(all(b));
+        ll flag = 1, ans = 1;
+        for (i = 0; i < n; i++)
+        {
+
+            int lb = (lower_bound(all(b), a[i]) - (b.begin() + i));
+            ans *= lb;
+            ans %= M;
+        }
+        cout << ans << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

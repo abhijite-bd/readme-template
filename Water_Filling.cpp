@@ -40,16 +40,15 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int t, a, b, c;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> a >> b >> c;
+        if ((a == 0 and b == 0) or (b == 0 and c == 0) or (a == 0 and c == 0))
+            cout << "Water filling time\n";
+        else
+            cout << "Not now\n";
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

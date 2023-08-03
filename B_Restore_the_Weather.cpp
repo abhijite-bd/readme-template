@@ -38,18 +38,40 @@ bool chk_coor(ll i, ll j)
 ll cs = 1;
 const int N = 2e5 + 10;
 const int M = 1e9 + 7;
+bool cmp(pair<ll, ll> a, pair<ll, ll> b)
+{
+    return a.second < b.second;
+}
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k;
+        vector<pair<ll, ll>> a(n), b(n);
+        for (i = 0; i < n; i++)
+        {
+            ll x;
+            cin >> x;
+            a[i] = {x, i};
+        }
+        for (i = 0; i < n; i++)
+        {
+            ll x;
+            cin >> x;
+            b[i] = {x, i};
+        }
+        sort(all(a));
+        sort(all(b));
+        for (i = 0; i < n; i++)
+        {
+            b[i].second = a[i].second;
+        }
+        sort(all(b), cmp);
+        for (auto e : b)
+            cout << e.first << ss;
+        cout << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

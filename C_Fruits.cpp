@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,34 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
+    ll n, m, i, j, k, l, ansmin, ansmax;
+    cin >> n >> m;
+    int a[n];
     for (i = 0; i < n; i++)
     {
         cin >> a[i];
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    map<string, int> mp;
+    while (m--)
+    {
+        string s;
+        cin >> s;
+        mp[s]++;
+    }
+    vector<int> v;
+    for (auto e : mp)
+        v.pb(e.second);
+    ansmin = ansmax = 0;
+    sort(a, a + n);
+    sort(allr(v));
+    for (i = 0; i < v.size(); i++)
+    {
+        ansmin += (a[i] * v[i]);
+    }
+    for (i = 0; i < v.size(); i++)
+    {
+        ansmax += (v[i] * a[n - 1 - i]);
+    }
+    cout << ansmin << ss << ansmax << endl;
     return 0;
 }

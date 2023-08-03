@@ -23,10 +23,11 @@ using namespace std;
 #define PI 3.141592653589793
 #define inf 1e9 + 10
 #define case() cout << "Case " << cs++ << ": "
+#define memset(x, y) memset(x, y, sizeof(x))
 vector<pair<int, int>> h_movements = {{2, 1}, {2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}, {-2, 1}, {-2, -1}};
 vector<pair<int, int>> movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 vector<pair<int, int>> d_movements = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, 1}, {-1, -1}, {1, -1}};
-ll n, m;
+ll n, m, i, j;
 bool chk_coor(ll i, ll j)
 {
     if (i < 0 || j < 0 || i >= n || j >= m)
@@ -40,16 +41,50 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
+    ll n, i, j, k, l;
     cin >> n;
-    vl a(n);
+    ll a[n], a1[n], a2[n];
     for (i = 0; i < n; i++)
     {
         cin >> a[i];
+        a1[i] = a2[i] = a[i];
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    for (i = 1; i < n; i++)
+    {
+        a1[i] += a1[i - 1];
+    }
+    for (i = n - 2; i >= 0; i--)
+    {
+        a2[i] += a2[i + 1];
+    }
+    // for (i = 0; i < n; i++)
+    // {
+    //     cout << a1[i] << ss;
+    // }
+    // cout << endl;
+    // for (i = 0; i < n; i++)
+    // {
+    //     cout << a2[i] << ss;
+    // }
+    // cout << endl;
+    int alice = 1;
+    i = 1;
+    j = n - 1;
+    while (i <= j)
+    {
+        if (a1[i] <= a2[j])
+        {
+            // cout << i << ss << j << endl;
+            // cout << a1[i] << ss << a2[j] << endl;
+            i++;
+            alice++;
+        }
+        else
+        {
+            // cout << a1[i] << ss << a2[j] << endl;
+            j--;
+        }
+    }
+    cout << alice << ss << n - alice << endl;
     return 0;
 }

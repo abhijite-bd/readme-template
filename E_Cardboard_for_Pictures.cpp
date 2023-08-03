@@ -40,16 +40,25 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    ll t, n, i, j, k, l;
+    cin >> t;
+    while (t--)
     {
-        cin >> a[i];
+        cin >> n >> k;
+        ll a[n];
+        ll sum = 0;
+        ll sq = 0;
+        for (i = 0; i < n; i++)
+        {
+            cin >> a[i];
+            sum += a[i];
+            sq += (a[i] * a[i]);
+        }
+        double x = 4 * n, y = 4 * sum, z = sq - k;
+        double ans = -y + sqrt(y * y - 4 * x * z);
+        ans /= (2 * x);
+        ll p = ans;
+        cout << p << endl;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
     return 0;
 }

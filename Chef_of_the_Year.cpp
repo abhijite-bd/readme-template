@@ -40,16 +40,49 @@ const int N = 2e5 + 10;
 const int M = 1e9 + 7;
 int main()
 {
+    int t, n, m, i, j, k, l;
 
-    int i, n;
-    cin >> n;
-    vl a(n);
+    cin >> n >> m;
+    map<string, int> name, country;
+    map<string, string> link;
+    string x, y;
     for (i = 0; i < n; i++)
     {
-        cin >> a[i];
+        cin >> x >> y;
+        link[x] = y;
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    string nameans = "zzzzzzzzzz", countryans = "zzzzzzzzzz";
+    int mxname = 0, mxcntry = 0;
+    for (i = 0; i < m; i++)
+    {
+        cin >> x;
+        name[x]++;
+        string desh = link[x];
+        country[desh]++;
+        if (name[x] > mxname)
+        {
+            mxname = name[x];
+            nameans = x;
+        }
+        else if (name[x] == mxname and nameans > x)
+        {
+            nameans = x;
+        }
+
+        if (country[desh] > mxcntry)
+        {
+            mxcntry = country[desh];
+            countryans = desh;
+        }
+        else if (country[desh] == mxcntry and countryans > desh)
+        {
+            countryans = desh;
+        }
+    }
+    // for (auto e : country)
+    //     cout << e.first << ss << e.second << endl;
+    cout << countryans << endl;
+    cout << nameans << endl;
+
     return 0;
 }

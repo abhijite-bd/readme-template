@@ -37,19 +37,30 @@ bool chk_coor(ll i, ll j)
 }
 ll cs = 1;
 const int N = 2e5 + 10;
+vector<int> vc[N];
+vector<int> vis(N);
 const int M = 1e9 + 7;
+void dfs(int v)
+{
+    cout << v << ss;
+    vis[v] = 1;
+    for (auto e : vc[v])
+    {
+        if (!vis[e])
+            dfs(e);
+    }
+}
 int main()
 {
-
-    int i, n;
-    cin >> n;
-    vl a(n);
-    for (i = 0; i < n; i++)
+    int n, u, v, i, j, x;
+    cin >> n >> x;
+    for (i = 0; i < x; i++)
     {
-        cin >> a[i];
+        cin >> u >> v;
+        vc[u].pb(v);
+        vc[v].pb(u);
     }
-    sort(all(a));
-    cout << (upper_bound(all(a), 4)) - a.begin() << endl;
-    cout << (lower_bound(all(a), 4)) - a.begin() << endl ;
+    cin >> x;
+    dfs(x);
     return 0;
 }
